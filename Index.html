@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <body style="margin-top:200px">
+    <body>
         <center>
+        <h1 align="center">Tower of Hanoi</h1>
+        <div id="before">
+        <input id="discs" type="range" min="3" max="10" step="1" value="3">
+        <p>No. of Discs: <span id="disc"></span></p>
+        <input type="button" id="start" onclick="start()" value="Start">
+        </div>
+        <div style="margin-top:150px">
         <canvas id="my" width="700" height="250"></canvas>
+        </div>
         </center>
     </body>
     <script>
+        function start(){
+            document.getElementById("before").style.visibility="hidden";
+        }
+        var x=document.getElementById("disc");
+        var y=document.getElementById("discs");
+        x.innerHTML=y.value;
+        var z=y.value;
+        y.oninput=function(){
+            x.innerHTML=this.value;
+        }
         var canvas = document.getElementById("my");
         var ctx=canvas.getContext("2d");
         ctx.lineWidth=10;
