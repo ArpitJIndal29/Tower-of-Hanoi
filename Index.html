@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body style="margin-top:200px">
+        <center>
+        <canvas id="my" width="700" height="250"></canvas>
+        </center>
+    </body>
+    <script>
+        var canvas = document.getElementById("my");
+        var ctx=canvas.getContext("2d");
+        ctx.lineWidth=10;
+        ctx.moveTo(0,250);
+        ctx.lineTo(200,250);
+        ctx.moveTo(100,250);
+        ctx.lineTo(100,0);
+        ctx.moveTo(250,250);
+        ctx.lineTo(450,250);
+        ctx.moveTo(350,250);
+        ctx.lineTo(350,0);
+        ctx.moveTo(500,250);
+        ctx.lineTo(700,250);
+        ctx.moveTo(600,250);
+        ctx.lineTo(600,0);
+        ctx.stroke();
+    </script>
+</html>
