@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <center>
+        <h1 align="center">Tower of Hanoi</h1>
+        <div id="before">
+        <input id="discs" type="range" min="3" max="10" step="1" value="3">
+        <p>No. of Discs: <span id="disc"></span></p>
+        <input type="button" id="start" onclick="start()" value="Start">
+        </div>
+        <div style="margin-top:100px">
+        <canvas id="my" width="700" height="300"></canvas>
+        </div>
+        </center>
+    </body>
+    <script>
+        function start(){
+            document.getElementById("before").style.visibility="hidden";
+        }
+        var d=document.getElementById("disc");
+        var ds=document.getElementById("discs");
+        d.innerHTML=ds.value;
+        ds.oninput=function(){
+            d.innerHTML=this.value;
+        }
+        var canvas = document.getElementById("my");
+        var ctx=canvas.getContext("2d");
+        ctx.lineWidth=10;
+        function createPillars(){
+            ctx.moveTo(0,290);
+            ctx.lineTo(200,290);
+            ctx.moveTo(100,290);
+            ctx.lineTo(100,40);
+            ctx.moveTo(250,290);
+            ctx.lineTo(450,290);
+            ctx.moveTo(350,290);
+            ctx.lineTo(350,40);
+            ctx.moveTo(500,290);
+            ctx.lineTo(700,290);
+            ctx.moveTo(600,290);
+            ctx.lineTo(600,40);
+            ctx.stroke();
+        }
+        function drawRect(x,y,w,h){
+            this.x=x;
+            this.y=y;
+            this.w=w;
+            this.h=h;
+        }
+        var x=90;
+        var y=265;
+        var w=20;
+        var h=20;
+        var rect=new drawRect(x,y,w,h);
+        function show(){
+            ctx.fillStyle="red";
+            createPillars()
+            ctx.fillRect(rect.x,rect.y,rect.w,rect.h);
+        }
+        show();
+        function getMousePos(canvas, event) {
+            var rect = canvas.getBoundingClientRect();
+            return {
+                x: event.clientX - rect.left,
+                y: event.clientY - rect.top
+            };
+        }
+        function isInside(pos, rect){
+            if(pos.x > 0 && pos.x < 200 && pos.y < 300 && pos.y>50)return 1;
+            if(pos.x > 250 && pos.x < 450 && pos.y < 300 && pos.y>50)return 2;
+            if(pos.x > 500 && pos.x < 700 && pos.y < 300 && pos.y>50)return 3;
+        }
+        var flag=1;//flag=1 neeche flag=0 upar
+        canvas.addEventListener('click', function(evt) {
+            var mousePos = getMousePos(canvas, evt);
+            if (isInside(mousePos,rect)==1) {
+                if(flag){
+                    if(rect.x==90){
+                        up();
+                        flag=0;
+                    }
+                }else{
+                    if(rect.y==15){
+                        rect.x=90;
+                        down();
+                        flag=1;
+                    }
+                }    
+            }
+            if(isInside(mousePos,rect)==2){
+                if(flag){
+                    if(rect.x==340){
+                        up();
+                        flag=0;
+                    }
+                }else{
+                    if(rect.y==15){
+                        rect.x=340;
+                        down();
+                        flag=1;
+                    }
+                }
+            }
+            if(isInside(mousePos,rect)==3){
+                if(flag){
+                    if(rect.x==590){
+                        up();
+                        flag=0;
+                    }
+                }else{
+                    if(rect.y==15){
+                        rect.x=590;
+                        down();
+                        flag=1;
+                    }
+                }
+            }   
+        }, false);
+        function up(){
+            rect.y=15;
+            ctx.clearRect(0,0,700,300);
+            show();
+        }
+        function down(){
+            rect.y=265;
+            ctx.clearRect(0,0,700,300);
+            show();
+        }    
+    </script>
+</html>
