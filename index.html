@@ -5,7 +5,7 @@
         <h1 align="center">Tower of Hanoi</h1>
         <p><strong>Aim: </strong>To move all the discs to some second or third pillar and place them in same sequence as in start</p>
         <p><strong>Rules: </strong>You cannot place a disc of large size on a disc of small size.</p>
-        <p><strong>How to Play: </strong>Click on a pillar to lift the topmost disc on the pillar then click on the pillar on which you want to place the disc.</p>
+        <p><strong>HOW TO PLAY: </strong>CLICK ON A PILLAR TO LIFT THE TOPMOST DISC ON THE PILLAR THEN CLICK ON THE PILLAR ON WHICH YOU WANT TO PLACE THE DISC.</p>
         <div id="before">
         <input id="discs" type="range" min="3" max="10" step="1" value="3">
         <p>No. of Discs: <span id="disc"></span></p>
@@ -18,7 +18,7 @@
         </center>
     </body>
     <script>
-        var s=0;
+       var s=0;
         var n;
         var nmoves=0;
         document.getElementById("moves").innerHTML=nmoves;
@@ -149,6 +149,7 @@
         }
         var flag=1;//flag=1 neeche flag=0 upar
         var upar;
+        var puranax;
         canvas.addEventListener('click', function(evt) {
             updatea();
             updateb();
@@ -158,6 +159,7 @@
                 if(flag){
                     up(topa);
                     upar=topa;
+                    puranax=rect[upar].x
                     flag=0;
                     updatea();
                     updateb();
@@ -180,6 +182,7 @@
                 if(flag){
                     up(topb);
                     upar=topb;
+                    puranax=rect[upar].x;
                     flag=0;
                     updatea();
                     updateb();
@@ -201,6 +204,7 @@
                 if(flag){
                     up(topc);
                     upar=topc;
+                    puranax=rect[upar].x
                     flag=0;
                     updatea();
                     updateb();
@@ -225,6 +229,9 @@
                 document.location.reload(true);
             }    
         }
+        function newGame(){
+            document.location.reload(true);
+        }
         function up(i){
             rect[i].y=15;
             ctx.clearRect(0,0,700,300);
@@ -234,7 +241,7 @@
             rect[upar].y=265-i*20;
             ctx.clearRect(0,0,700,300);
             show();
-            nmoves++;
+            if(puranax!=rect[upar].x)nmoves++;
             document.getElementById("moves").innerHTML=nmoves;
             updatea();
             updateb();
