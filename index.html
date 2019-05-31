@@ -11,6 +11,7 @@
         <p>No. of Discs: <span id="disc"></span></p>
         <input type="button" id="start" onclick="start()" value="Start">
         </div>
+        <p id="invalid" style="visibility:hidden">This move is not allowed</p>
         <div style="margin-top:100px">
         <canvas id="my" width="700" height="300"></canvas>
         </div>
@@ -102,7 +103,7 @@
             for(i=0;i<n;i++){
                 if(rect[i].x>=0 && rect[i].x<=200){
                     if(rect[i].y>15)na++;
-                    if(topa>10)topa=i;    
+                    if(topa>10)topa=i;
                     if(rect[topa].y>rect[i].y){
                         topa=i;
                     }
@@ -167,6 +168,7 @@
                 }else{
                     if(rect[upar].y==15){
                         if(topa>=upar){
+                            document.getElementById("invalid").style.visibility="hidden";
                             rect[upar].x=90-10*upar;
                             updatea();
                             down(upar,na);
@@ -174,9 +176,11 @@
                             updatea();
                             updateb();
                             updatec();
+                        }else{
+                          document.getElementById("invalid").style.visibility="visible";
                         }
                     }
-                }    
+                }
             }
             if(isInside(mousePos,rect)==2){
                 if(flag){
@@ -190,12 +194,15 @@
                 }else{
                     if(rect[upar].y==15){
                         if(topb>=upar){
+                            document.getElementById("invalid").style.visibility="hidden";
                             rect[upar].x=340-10*upar;
                             down(upar,nb);
                             flag=1;
                             updatea();
                             updateb();
                             updatec();
+                        }else{
+                          document.getElementById("invalid").style.visibility="visible";
                         }
                     }
                 }
@@ -212,22 +219,33 @@
                 }else{
                     if(rect[upar].y==15){
                         if(topc>=upar){
+                            document.getElementById("invalid").style.visibility="hidden";
                             rect[upar].x=590-10*upar;
                             down(upar,nc);
                             flag=1;
                             updatea();
                             updateb();
                             updatec();
+                        }else{
+                          document.getElementById("invalid").style.visibility="visible";
                         }
                     }
                 }
-            }   
+            }
         }, false);
         function check(){
             if(nb==n||nc==n){
                 alert("Congratulations!! You completed the game in "+nmoves+" moves!!");
-                document.location.reload(true);
-            }    
+                n++;
+                if(n>10)n=3;
+                nmoves=0;
+                document.getElementById("moves").innerHTML=nmoves;
+                createDiscs(n);
+                show();
+                updatea();
+                updateb();
+                updatec();
+            }
         }
         function newGame(){
             document.location.reload(true);
