@@ -97,6 +97,7 @@
         var na=0;
         var nb=0;
         var nc=0;
+
         function updatea(){
             na=0;
             topa=11;
@@ -110,6 +111,7 @@
                 }
             }
         }
+
         function updateb(){
             nb=0;
             topb=11;
@@ -123,6 +125,7 @@
                 }
             }
         }
+
         function updatec(){
             nc=0;
             topc=11;
@@ -136,6 +139,7 @@
                 }
             }
         }
+
         function getMousePos(canvas, event) {
             var rect = canvas.getBoundingClientRect();
             return {
@@ -143,6 +147,7 @@
                 y: event.clientY - rect.top
             };
         }
+
         function isInside(pos, rect){
             if(pos.x > 0 && pos.x < 200 && pos.y < 300 && pos.y>50)return 1;
             if(pos.x > 250 && pos.x < 450 && pos.y < 300 && pos.y>50)return 2;
@@ -266,6 +271,14 @@
             updateb();
             updatec();
             check();
+            loadDoc();
+
+        }
+        function laodDoc(){
+            var xhttp = new XMLHttpRequest();   
+            xhttp.open("GET", "saving.php?n= & FromBar= & ToBar= & DiscIndex=", true);
+            xhttp.send();
+        }
         }
     </script>
 </html>
