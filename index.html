@@ -279,6 +279,21 @@
             xhttp.open("GET", "saving.php?n1="+n, true);
             xhttp.send();
         }
+        function loadFromBar(){
+            var xhttp = new XMLHttpRequest();   
+            xhttp.open("GET", "savingFrom.php?From="+FromBar, true);
+            xhttp.send();
+        }
+        function loadToBar(){
+            var xhttp = new XMLHttpRequest();   
+            xhttp.open("GET", "savingFrom.php?To="+ToBar, true);
+            xhttp.send();
+        }
+        function loadupar(){
+            var xhttp = new XMLHttpRequest();   
+            xhttp.open("GET", "savingFrom.php?upar1="+upar, true);
+            xhttp.send();
+        }
         }
     </script>
 </html>
