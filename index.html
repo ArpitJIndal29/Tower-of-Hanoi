@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html>
+<style>
+.credits{
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  color: white;
+  background-color: blue;
+  width: 100%;
+  font-weight: 600;
+}
+</style>
     <body>
         <center>
         <h1 align="center">Tower of Hanoi</h1>
@@ -17,6 +28,9 @@
         </div>
         <p>No. of moves: <span id="moves"></span></p>
         </center>
+        <div class="credits">
+          <p>Created By: Rishabh Kumar Chaudhary and Arpit Agarwal<p>
+        </div>
     </body>
     <script>
        var s=0;
@@ -26,6 +40,7 @@
         function start(){
             document.getElementById("before").style.visibility="hidden";
             s=1;
+            loadDoc();
         }
         var d=document.getElementById("disc");
         var ds=document.getElementById("discs");
@@ -151,6 +166,7 @@
         var flag=1;//flag=1 neeche flag=0 upar
         var upar;
         var puranax;
+        var FromBar, ToBar;
         canvas.addEventListener('click', function(evt) {
             updatea();
             updateb();
@@ -159,6 +175,7 @@
             if ((isInside(mousePos,rect)==1)&&(!s))alert("Start the game first!!!");
             if ((isInside(mousePos,rect)==1)&&s) {
                 if(flag){
+                    FromBar="A";
                     up(topa);
                     upar=topa;
                     puranax=rect[upar].x
@@ -169,6 +186,7 @@
                 }else{
                     if(rect[upar].y==15){
                         if(topa>=upar){
+                            ToBar="A";
                             document.getElementById("invalid").style.visibility="hidden";
                             rect[upar].x=90-10*upar;
                             updatea();
@@ -185,6 +203,7 @@
             }
             if(isInside(mousePos,rect)==2){
                 if(flag){
+                    FromBar="B";
                     up(topb);
                     upar=topb;
                     puranax=rect[upar].x;
@@ -195,6 +214,7 @@
                 }else{
                     if(rect[upar].y==15){
                         if(topb>=upar){
+                            ToBar="B";
                             document.getElementById("invalid").style.visibility="hidden";
                             rect[upar].x=340-10*upar;
                             down(upar,nb);
@@ -210,6 +230,7 @@
             }
             if(isInside(mousePos,rect)==3){
                 if(flag){
+                    FromBar="C";
                     up(topc);
                     upar=topc;
                     puranax=rect[upar].x
@@ -220,6 +241,7 @@
                 }else{
                     if(rect[upar].y==15){
                         if(topc>=upar){
+                            ToBar="C";
                             document.getElementById("invalid").style.visibility="hidden";
                             rect[upar].x=590-10*upar;
                             down(upar,nc);
@@ -246,10 +268,8 @@
                 updatea();
                 updateb();
                 updatec();
+                loadDoc();
             }
-        }
-        function newGame(){
-            document.location.reload(true);
         }
         function up(i){
             rect[i].y=15;
@@ -260,12 +280,19 @@
             rect[upar].y=265-i*20;
             ctx.clearRect(0,0,700,300);
             show();
-            if(puranax!=rect[upar].x)nmoves++;
+            if(puranax!=rect[upar].x){
+              nmoves++;
+            }
             document.getElementById("moves").innerHTML=nmoves;
             updatea();
             updateb();
             updatec();
             check();
+        }
+        function loadDoc(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "saving.php?n1="+n, true);
+            xhttp.send();
         }
     </script>
 </html>
